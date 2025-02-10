@@ -19,6 +19,9 @@ class HardUpdateScreen extends StatelessWidget {
     return Scaffold(
       body: UpdateWidgetBody(
         locale: locale,
+        isFullScreen: true,
+        onLaterTap: onLaterTap,
+        onUpdateTap: onUpdateTap,
       ),
     );
   }

@@ -5,10 +5,12 @@ class UpdateWidgetBody extends StatelessWidget {
   const UpdateWidgetBody({
     super.key,
     required this.locale,
+    this.isFullScreen = false,
     this.onLaterTap,
     this.onUpdateTap,
   });
 
+  final bool isFullScreen;
   final UpdateLocale locale;
   final VoidCallback? onLaterTap;
   final VoidCallback? onUpdateTap;
@@ -21,14 +23,22 @@ class UpdateWidgetBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          if (isFullScreen) const SizedBox(),
           Column(
             children: [
+              Image.asset(
+                'packages/frezy_app_update/assets/download.png',
+                width: 250,
+                height: 250,
+              ),
               Text(
                 locale.title,
-                style: theme.textTheme.headlineMedium,
+                style: theme.textTheme.headlineLarge?.copyWith(
+                  fontSize: 24,
+                ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 2),
               Text(
                 locale.description,
                 style: TextStyle(fontSize: 16),
@@ -45,13 +55,14 @@ class UpdateWidgetBody extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: onUpdateTap,
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: theme.primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
                   ),
                   child: Text(
                     locale.updateButtonTitle,
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
               ),

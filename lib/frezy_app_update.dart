@@ -60,7 +60,6 @@ class FrezyAppUpdate {
     if (context.mounted) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          settings: const RouteSettings(name: '/hard-update'),
           builder: (context) {
             return HardUpdateScreen(
               locale: locale,
