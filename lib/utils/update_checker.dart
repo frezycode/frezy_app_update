@@ -2,7 +2,7 @@ import 'package_info_provider.dart';
 import 'version_comparer.dart';
 
 class UpdateChecker {
-  UpdateChecker({
+  const UpdateChecker({
     this.packageInfoPrivider = const PackageInfoProvider(),
     this.versionComparer = const VersionComparer(),
   });
@@ -10,18 +10,27 @@ class UpdateChecker {
   final PackageInfoProvider packageInfoPrivider;
   final VersionComparer versionComparer;
 
-  Future<UpdateStatus> checkVersion(String remoteVersion) async {
+  Future<UpdateStatus> checkVersion({
+    required String soft,
+    required String hard,
+  }) async {
     final packageInfo = await packageInfoPrivider.getPackageInfo();
     final currentVersion = packageInfo.version;
 
-    final available = versionComparer.isVersionNewer(
+    final hardAvailable = versionComparer.isVersionNewer(
       currentVersion,
-      remoteVersion,
+      hard,
     );
-    if (available) return UpdateStatus.available;
+    if (hardAvailable) return UpdateStatus.hard;
+
+    final softAvailable = versionComparer.isVersionNewer(
+      currentVersion,
+      soft,
+    );
+    if (softAvailable) return UpdateStatus.soft;
 
     return UpdateStatus.none;
   }
 }
 
-enum UpdateStatus { none, available, required }
+enum UpdateStatus { none, soft, hard }
