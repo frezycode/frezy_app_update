@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frezy_app_update/models/models.dart';
 import 'package:frezy_app_update/utils/update_checker.dart';
 import 'package:frezy_app_update/view/hard_update_screen.dart';
 import 'package:frezy_app_update/view/soft_update_bottom_sheet.dart';
@@ -18,6 +19,8 @@ class FrezyAppUpdate {
     required String hard,
     VoidCallback? onSoftUpdate,
     VoidCallback? onHardUpdate,
+    required UpdateLocale softLocale,
+    required UpdateLocale hardLocale,
   }) async {
     final updateStatus = await _updateChecker.checkVersion(
       soft: soft,
@@ -26,17 +29,17 @@ class FrezyAppUpdate {
 
     switch (updateStatus) {
       case UpdateStatus.soft:
-        _onSoftUpdate();
+        _onSoftUpdate(softLocale);
         break;
       case UpdateStatus.hard:
-        _onHardUpdate();
+        _onHardUpdate(hardLocale);
         break;
       case UpdateStatus.none:
         break;
     }
   }
 
-  void _onHardUpdate() {
+  void _onHardUpdate(UpdateLocale locale) {
     if (context.mounted) {
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -49,12 +52,12 @@ class FrezyAppUpdate {
     }
   }
 
-  void _onSoftUpdate() {
+  void _onSoftUpdate(UpdateLocale locale) {
     if (context.mounted) {
       showModalBottomSheet(
         context: context,
         builder: (context) {
-          return const SoftUpdateBottomSheet();
+          return SoftUpdateBottomSheet(locale: locale);
         },
       );
     }
