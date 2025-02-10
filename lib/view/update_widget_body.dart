@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:frezy_app_update/models/models.dart';
+import 'package:frezy_app_update/utils/update_checker.dart';
 
 class UpdateWidgetBody extends StatelessWidget {
   const UpdateWidgetBody({
     super.key,
     required this.locale,
     this.isFullScreen = false,
+    this.status = UpdateStatus.soft,
     this.onLaterTap,
     this.onUpdateTap,
   });
 
+  final UpdateStatus status;
   final bool isFullScreen;
   final UpdateLocale locale;
   final VoidCallback? onLaterTap;
@@ -66,17 +69,23 @@ class UpdateWidgetBody extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: TextButton(
-                  onPressed: onLaterTap,
-                  child: Text(
-                    locale.remindButtonTitle,
-                    style: TextStyle(fontSize: 14),
+              if (status == UpdateStatus.soft)
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    onPressed: onLaterTap,
+                    child: Text(
+                      locale.remindButtonTitle,
+                      style: TextStyle(fontSize: 14),
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ],

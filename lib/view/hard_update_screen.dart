@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frezy_app_update/models/models.dart';
+import 'package:frezy_app_update/utils/update_checker.dart';
 import 'package:frezy_app_update/view/update_widget_body.dart';
 
 class HardUpdateScreen extends StatelessWidget {
@@ -16,12 +17,16 @@ class HardUpdateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: UpdateWidgetBody(
-        locale: locale,
-        isFullScreen: true,
-        onLaterTap: onLaterTap,
-        onUpdateTap: onUpdateTap,
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: UpdateWidgetBody(
+          locale: locale,
+          isFullScreen: true,
+          status: UpdateStatus.hard,
+          onLaterTap: onLaterTap,
+          onUpdateTap: onUpdateTap,
+        ),
       ),
     );
   }
