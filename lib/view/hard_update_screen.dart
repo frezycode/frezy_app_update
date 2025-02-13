@@ -7,7 +7,7 @@ class HardUpdateScreen extends StatelessWidget {
   const HardUpdateScreen({
     super.key,
     required this.locale,
-    required this.onLaterTap,
+    this.onLaterTap,
     required this.onUpdateTap,
   });
 

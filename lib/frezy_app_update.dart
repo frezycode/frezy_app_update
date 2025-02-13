@@ -26,9 +26,9 @@ class FrezyAppUpdate {
     required String soft,
     required String hard,
     required AppIds appIds,
-    Function(UpdateStatus status)? onUpdateStart,
-    Function(UpdateStatus status)? onLaterTap,
-    Function(UpdateStatus status)? onUpdateTap,
+    Function(UpdateStatus status)? onShow,
+    Function(UpdateStatus status)? onCancel,
+    Function(UpdateStatus status)? onUpdate,
     required UpdateLocale softLocale,
     required UpdateLocale hardLocale,
   }) async {
@@ -41,17 +41,16 @@ class FrezyAppUpdate {
       case UpdateStatus.soft:
         _onSoftUpdate(
           locale: softLocale,
-          onUpdateStart: () => onUpdateStart?.call(status),
-          onLaterTap: () => onLaterTap?.call(status),
-          onUpdateTap: () => _onUpdateTap(onUpdateTap, status, appIds),
+          onShow: () => onShow?.call(status),
+          onCancel: () => onCancel?.call(status),
+          onUpdateTap: () => _onUpdateTap(onUpdate, status, appIds),
         );
         break;
       case UpdateStatus.hard:
         _onHardUpdate(
           locale: softLocale,
-          onUpdateStart: () => onUpdateStart?.call(status),
-          onLaterTap: () => onLaterTap?.call(status),
-          onUpdateTap: () => _onUpdateTap(onUpdateTap, status, appIds),
+          onUpdateStart: () => onShow?.call(status),
+          onUpdateTap: () => _onUpdateTap(onUpdate, status, appIds),
         );
         break;
       case UpdateStatus.none:
@@ -86,7 +85,6 @@ class FrezyAppUpdate {
   void _onHardUpdate({
     required UpdateLocale locale,
     VoidCallback? onUpdateStart,
-    VoidCallback? onLaterTap,
     VoidCallback? onUpdateTap,
   }) {
     if (context.mounted) {
@@ -96,7 +94,6 @@ class FrezyAppUpdate {
           builder: (context) {
             return HardUpdateScreen(
               locale: locale,
-              onLaterTap: onLaterTap,
               onUpdateTap: onUpdateTap,
             );
           },
@@ -107,18 +104,18 @@ class FrezyAppUpdate {
 
   void _onSoftUpdate({
     required UpdateLocale locale,
-    VoidCallback? onUpdateStart,
-    VoidCallback? onLaterTap,
+    VoidCallback? onShow,
+    VoidCallback? onCancel,
     VoidCallback? onUpdateTap,
   }) {
     if (context.mounted) {
-      onUpdateStart?.call();
+      onShow?.call();
       showModalBottomSheet(
         context: context,
         builder: (context) {
           return SoftUpdateBottomSheet(
             locale: locale,
-            onLaterTap: onLaterTap,
+            onLaterTap: onCancel,
             onUpdateTap: onUpdateTap,
           );
         },
