@@ -42,7 +42,7 @@ class FrezyAppUpdate {
         _onSoftUpdate(
           locale: softLocale,
           onShow: () => onShow?.call(status),
-          onCancel: () => onCancel?.call(status),
+          onCancel: () => _onCancelTap(onCancel, status),
           onUpdateTap: () => _onUpdateTap(onUpdate, status, appIds),
         );
         break;
@@ -56,6 +56,14 @@ class FrezyAppUpdate {
       case UpdateStatus.none:
         break;
     }
+  }
+
+  Future<void> _onCancelTap(
+    Function(UpdateStatus status)? onCancel,
+    UpdateStatus status,
+  ) async {
+    onCancel?.call(status);
+    Navigator.of(context).pop();
   }
 
   Future<void> _onUpdateTap(
