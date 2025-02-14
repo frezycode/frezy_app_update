@@ -20,6 +20,7 @@ class UpdateWidgetBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final remindTitle = locale.remindButtonTitle;
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -33,6 +34,7 @@ class UpdateWidgetBody extends StatelessWidget {
                 width: 250,
                 height: 250,
               ),
+              if (isFullScreen) const SizedBox(height: 32),
               Text(
                 locale.title,
                 style: theme.textTheme.headlineLarge?.copyWith(
@@ -68,7 +70,7 @@ class UpdateWidgetBody extends StatelessWidget {
                   ),
                 ),
               ),
-              if (status == UpdateStatus.soft)
+              if (status == UpdateStatus.soft && remindTitle != null)
                 SizedBox(
                   width: double.infinity,
                   height: 56,
@@ -80,7 +82,7 @@ class UpdateWidgetBody extends StatelessWidget {
                     ),
                     onPressed: onLaterTap,
                     child: Text(
-                      locale.remindButtonTitle,
+                      remindTitle,
                       style: TextStyle(fontSize: 14),
                     ),
                   ),

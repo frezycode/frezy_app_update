@@ -3,11 +3,11 @@ class UpdateLocale {
     required this.title,
     required this.description,
     required this.updateButtonTitle,
-    required this.remindButtonTitle,
+    this.remindButtonTitle,
   });
 
   final String title;
   final String description;
   final String updateButtonTitle;
-  final String remindButtonTitle;
+  final String? remindButtonTitle;
 }

@@ -19,12 +19,15 @@ class HardUpdateScreen extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        body: UpdateWidgetBody(
-          locale: locale,
-          isFullScreen: true,
-          status: UpdateStatus.hard,
-          onLaterTap: onLaterTap,
-          onUpdateTap: onUpdateTap,
+        body: Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: UpdateWidgetBody(
+            locale: locale,
+            isFullScreen: true,
+            status: UpdateStatus.hard,
+            onLaterTap: onLaterTap,
+            onUpdateTap: onUpdateTap,
+          ),
         ),
       ),
     );

@@ -48,7 +48,7 @@ class FrezyAppUpdate {
         break;
       case UpdateStatus.hard:
         _onHardUpdate(
-          locale: softLocale,
+          locale: hardLocale,
           onUpdateStart: () => onShow?.call(status),
           onUpdateTap: () => _onUpdateTap(onUpdate, status, appIds),
         );
