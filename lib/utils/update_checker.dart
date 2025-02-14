@@ -1,3 +1,5 @@
+import 'package:frezy_app_update/models/models.dart';
+
 import 'package_info_provider.dart';
 import 'version_comparer.dart';
 
@@ -32,5 +34,3 @@ class UpdateChecker {
     return UpdateStatus.none;
   }
 }
-
-enum UpdateStatus { none, soft, hard }
