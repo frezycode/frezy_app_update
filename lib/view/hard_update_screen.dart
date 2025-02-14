@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frezy_app_update/models/models.dart';
-import 'package:frezy_app_update/utils/update_checker.dart';
 import 'package:frezy_app_update/view/update_widget_body.dart';
 
 class HardUpdateScreen extends StatelessWidget {
