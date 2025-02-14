@@ -24,6 +24,7 @@ class UpdateWidgetBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
+        mainAxisSize: isFullScreen ? MainAxisSize.max : MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           if (isFullScreen) const SizedBox(),

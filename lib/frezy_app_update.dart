@@ -120,6 +120,7 @@ class FrezyAppUpdate {
       onShow?.call();
       showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (context) {
           return SoftUpdateBottomSheet(
             locale: locale,
