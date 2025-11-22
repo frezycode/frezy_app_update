@@ -16,9 +16,10 @@ class SoftUpdateBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration:  BoxDecoration(
+        color: theme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(24),
         ),
